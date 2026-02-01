@@ -20,8 +20,15 @@ const loadDefaultProducts = async() => {
 const getProducts = async (req, res) => {
   try {
     const products = await Product.findAll({ order: [['createdAt', 'ASC']] });
-    res.status(200).json(products);
 
+    const productWithImages = products.map(p=> {
+      const productJson = p.toJSON();
+      productJson.image = `${req.protocol}://${req.get('host')}/${productJson.image}`;
+      return productJson;
+    });
+
+    res.status(200).json(productWithImages);
+    
   } catch (error) {
     res.status(500).json({
       message: 'Internaln server error', error
