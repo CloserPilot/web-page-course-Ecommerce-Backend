@@ -26,6 +26,19 @@ const registerUser = async(req, res) => {
   }
 }
 
+
+const getUsers = async(req, res) => {
+  try {
+    const user = await User.findAll();
+    res.status(200).json(user);
+  } catch (error) {
+      res.status(500).json({
+      message: 'Internaln server error', error
+    });
+  }
+}
+
 export {
-  registerUser
+  registerUser,
+  getUsers
 }
