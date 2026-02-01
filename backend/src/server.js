@@ -1,16 +1,13 @@
 import express from 'express';
-import dotenv from 'dotenv';
 
-dotenv.config(
-    { path: './.env' }
-);
+const app = express();
+app.use(express.json());
 
-const server = express();
-server.use(express.json());
-
-import userRouter from './routes/user.routes.js';
-server.use('/api/v1/users', userRouter);
+import itemRouter from './routes/item.routes.js';
+import productRouter from './routes/products.routes.js';
+app.use('/api/v1/item', itemRouter);
+app.use('/api/v1/products', productRouter);
 
 
-//example route http://localhost:4000/api/v1/users/register
-export default server;
+//example route http://localhost:4000/api/v1/item/register
+export default app;

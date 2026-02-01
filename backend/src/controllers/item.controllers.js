@@ -1,6 +1,6 @@
-import User from "../models/user.model.js"
+import Item from "../models/item.model.js"
 
-const registerUser = async(req, res) => {
+const registerItem = async(req, res) => {
   try {
     console.log("Request body", req.body);
     const { name, email } = req.body;
@@ -10,15 +10,15 @@ const registerUser = async(req, res) => {
       return res.status(400).json({ error: 'All fields are required'});
     }
 
-    const user =  await User.create({
+    const item =  await Item.create({
       name, 
       email : email.toLowerCase()
     });
-    console.log("User created:", user);
+    console.log("Item created:", item);
 
     res.status(201).json({
-      message: "User register sucessfully",
-      user: {id: user.id, name: user.name, email: user.email}
+      message: "Item register sucessfully",
+      item: {id: item.id, name: item.name, email: item.email}
     });
   } catch (error) {
     console.error("Error in registerUser:", error);
@@ -27,10 +27,10 @@ const registerUser = async(req, res) => {
 }
 
 
-const getUsers = async(req, res) => {
+const getItems = async(req, res) => {
   try {
-    const user = await User.findAll();
-    res.status(200).json(user);
+    const item = await Item.findAll();
+    res.status(200).json(item);
   } catch (error) {
       res.status(500).json({
       message: 'Internaln server error', error
@@ -39,6 +39,6 @@ const getUsers = async(req, res) => {
 }
 
 export {
-  registerUser,
-  getUsers
+  registerItem,
+  getItems
 }
