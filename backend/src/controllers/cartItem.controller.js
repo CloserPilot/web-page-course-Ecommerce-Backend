@@ -89,8 +89,39 @@ const registerCart = async (req, res) => {
   }
 }
 
+const updateCart = async (req, res) => {
+  try {
+    if (Object.keys(req.body).length === 0) {
+      return res.status(400).json({ message: "No data provided for update" });
+    }
+
+    const [updatedRows] = await CartItem.update(req.body, {
+      where: { productId: req.params.productID },
+      returning: true
+    });
+
+    if (updatedRows === 0) {
+      return res.status(404).json({ message: "Cart not found" });
+    }
+
+    const updatedCart = await CartItem.findOne({
+      where: { productId: req.params.productID }
+    });
+
+    res.status(200).json({
+      message: "Cart updated successfully",
+      cart: updatedCart
+    });
+  } catch (error) {
+    console.error("Error in updateCart:", error);
+    res.status(500).json({ message: "Internal server error", error: error.message });
+  }
+};
+
+
 export{
   loadDefaulCart,
   getDefaultCarts,
-  registerCart
+  registerCart,
+  updateCart
 }
