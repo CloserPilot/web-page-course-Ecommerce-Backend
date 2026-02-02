@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import sequelize from './config/database.js';
 import app from './server.js';
 import { loadDefaultProducts } from './controllers/product.controllers.js';
+import { loadDefaulDeliveryOptions } from './controllers/deliveryOptions.controller.js'
 
 
 dotenv.config(
@@ -14,6 +15,7 @@ const startServer = async () => {
     console.log('Base de datos conectada ✅');
 
     await loadDefaultProducts();
+    await loadDefaulDeliveryOptions();
     
     app.listen(process.env.PORT || 8000, () => {
       console.log(`Servidor corriendo en http://localhost:${process.env.PORT || 8000}`);
