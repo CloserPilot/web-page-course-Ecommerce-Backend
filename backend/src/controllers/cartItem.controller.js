@@ -118,10 +118,26 @@ const updateCart = async (req, res) => {
   }
 };
 
+const deleteCart = async (req, res) => {
+  try {
+    const deletedRows = await CartItem.destroy({
+      where: { productId: req.params.productID }
+    });
+
+    if (deletedRows === 0) {
+      return res.status(404).json({ message: "Cart not found" });
+    }
+
+    res.status(200).json({ message: "Cart successfully deleted" });
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error", error: error.message });
+  }
+};
 
 export{
   loadDefaulCart,
   getDefaultCarts,
   registerCart,
-  updateCart
+  updateCart,
+  deleteCart
 }

@@ -1,9 +1,10 @@
 import { Router } from 'express'
-import { getDefaultCarts, registerCart, updateCart } from '../controllers/cartItem.controller.js'
+import { getDefaultCarts, registerCart, updateCart, deleteCart } from '../controllers/cartItem.controller.js'
 const cartRouter = Router();
 
 //?expand === 'product'
 cartRouter.route('/').get(getDefaultCarts);
 cartRouter.route('/register').post(registerCart);
 cartRouter.route('/:productID').put(updateCart);
+cartRouter.route('/delete/:productID').delete(deleteCart);
 export default cartRouter;
