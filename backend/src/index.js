@@ -3,6 +3,7 @@ import sequelize from './config/database.js';
 import app from './server.js';
 import { loadDefaultProducts } from './controllers/product.controllers.js';
 import { loadDefaulDeliveryOptions } from './controllers/deliveryOptions.controller.js'
+import { loadDefaulCart } from './controllers/cartItem.controller.js'
 
 
 dotenv.config(
@@ -16,6 +17,7 @@ const startServer = async () => {
 
     await loadDefaultProducts();
     await loadDefaulDeliveryOptions();
+    await loadDefaulCart();
     
     app.listen(process.env.PORT || 8000, () => {
       console.log(`Servidor corriendo en http://localhost:${process.env.PORT || 8000}`);
