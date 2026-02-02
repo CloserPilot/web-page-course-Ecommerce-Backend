@@ -1,4 +1,5 @@
 import CartItem from "../models/cartItem.model.js"
+import Product from "../models/product.model.js"
 import { defaultCart } from "../defaultData/defaultCart.js"
 
 const loadDefaulCart = async() => {
@@ -19,7 +20,25 @@ const loadDefaulCart = async() => {
 
 const getDefaultCarts = async (req, res) => {
   try {
-    const carts = await CartItem.findAll();
+    const expand = req.query.expand;
+    let carts = await CartItem.findAll();
+
+    if(expand === 'product'){
+      carts = await Promise.all(carts.map( async (item) => {
+        let product = await Product.findByPk(item.productId);
+
+        //Codigo para insertar la ruta absoluta
+        product = product.toJSON();
+        product.image = `${req.protocol}://${req.get('host')}/${product.image}`;
+
+        return{
+          ...item.toJSON(),
+          product
+        }
+      }
+      ))
+    }
+
     res.status(200).json(carts);
     
   } catch (error) {
