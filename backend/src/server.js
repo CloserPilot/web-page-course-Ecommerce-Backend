@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import productRouter from './routes/products.routes.js';
 import deliveryRouter from './routes/deliveryOptions.routes.js'
 import cartRouter from './routes/cartItem.routes.js';
+import orderRouter from './routes/order.routes.js';
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -14,14 +15,14 @@ app.use(express.json());
 app.use('/products', productRouter);
 app.use('/delivery',deliveryRouter);
 app.use('/cart', cartRouter);
+app.use('/order', orderRouter);
 
 // get the images
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
-//http://localhost:4000/products
-//http://localhost:4000/delivery
-//http://localhost:4000/cart/register
-//http://localhost:4000/cart/:productID
+
+
+
 
 
 export default app;

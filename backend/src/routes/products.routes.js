@@ -4,3 +4,5 @@ const productRouter = Router();
 
 productRouter.route('/').get(getProducts);
 export default productRouter;
+
+//http://localhost:4000/products

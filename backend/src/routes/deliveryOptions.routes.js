@@ -4,3 +4,5 @@ const deliveryRouter = Router();
 
 deliveryRouter.route('/').get(getDefaulDeliveryOptions);
 export default deliveryRouter;
+
+//http://localhost:4000/delivery
