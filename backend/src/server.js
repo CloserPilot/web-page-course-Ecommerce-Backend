@@ -20,7 +20,7 @@ app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 //http://localhost:4000/products
 //http://localhost:4000/delivery
-//http://localhost:4000/cart
+//http://localhost:4000/cart/register
 
 
 export default app;
