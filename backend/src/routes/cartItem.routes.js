@@ -9,7 +9,7 @@ cartRouter.route('/:productID').put(updateCart);
 cartRouter.route('/delete/:productID').delete(deleteCart);
 export default cartRouter;
 
-//http://localhost:4000/cart/
+//http://localhost:4000/cart/?expand === 'product'
 //http://localhost:4000/cart/register
 //http://localhost:4000/cart/:productID
 //http://localhost:4000/car/delete/:productID
