@@ -2,23 +2,6 @@ import Order from "../models/orders.model.js"
 import Product from '../models/product.model.js'
 import Cartitem from '../models/cartItem.model.js'
 import DeliveryOptions from '../models/deliveryOptions.model.js'
-import { defaultOrders } from "../defaultData/defaultorders.js"
-
-const loadDefaultOrder = async() => {
-  try {
-    const orderCount = await Order.count();
-
-    if(orderCount===0){
-      await Order.bulkCreate(defaultOrders);
-      console.log("Order por defecto cargados")
-    }
-    else{
-      console.log("Order ya existen en la BD")
-    }
-  } catch (error) {
-    console.error("Error in defaultOrder:", error);
-  }
-};
 
 const getOrders = async (req, res) => {
   try {
@@ -135,7 +118,6 @@ const createOrder = async (req, res) => {
 };
 
 export{
-  loadDefaultOrder,
   getOrders,
   createOrder,
   getIdOrder

@@ -1,21 +1,4 @@
 import DeliveryOptions from "../models/deliveryOptions.model.js"
-import { defaultDeliveryOptions } from "../defaultData/deliveryOptions.js"
-
-const loadDefaulDeliveryOptions = async() => {
-  try {
-    const deliveryCount = await DeliveryOptions.count();
-
-    if(deliveryCount===0){
-      await DeliveryOptions.bulkCreate(defaultDeliveryOptions);
-      console.log("Delivery por defecto cargados")
-    }
-    else{
-      console.log("Delivery ya existen en la BD")
-    }
-  } catch (error) {
-    console.error("Error in defaultDeliveryOptions:", error);
-  }
-}
 
 const getDefaulDeliveryOptions = async (req, res) => {
   try {
@@ -30,6 +13,5 @@ const getDefaulDeliveryOptions = async (req, res) => {
 };
 
 export{
-  loadDefaulDeliveryOptions,
   getDefaulDeliveryOptions
 }

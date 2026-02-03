@@ -1,11 +1,7 @@
 import dotenv from 'dotenv';
 import sequelize from './config/database.js';
 import app from './server.js';
-import { loadDefaultProducts } from './controllers/product.controllers.js';
-import { loadDefaulDeliveryOptions } from './controllers/deliveryOptions.controller.js'
-import { loadDefaulCart } from './controllers/cartItem.controller.js'
-import { loadDefaultOrder } from './controllers/order.controller.js'
-
+import { loadDefaultProducts } from './controllers/product.controllers.js'
 
 dotenv.config(
   { path: './.env' }
@@ -17,10 +13,7 @@ const startServer = async () => {
     console.log('Base de datos conectada ✅');
 
     await loadDefaultProducts();
-    await loadDefaulDeliveryOptions();
-    await loadDefaulCart();
-    await loadDefaultOrder();
-    
+
     app.listen(process.env.PORT || 8000, () => {
       console.log(`Servidor corriendo en http://localhost:${process.env.PORT || 8000}`);
     });
