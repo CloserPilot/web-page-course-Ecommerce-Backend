@@ -53,6 +53,41 @@ const getOrders = async (req, res) => {
   }
 };
 
+const getIdOrder = async (req, res) => {
+  try {
+    const expand = req.query.expand;
+    let order = await Order.findByPk(req.params.orderID);
+
+    if(!order) return res.status(404).json({
+      message: "Order not found"
+    });
+
+    if(expand === 'product'){
+      const products = await Promise.all(order.products.map( async (item) => {
+        let product = await Product.findByPk(item.productId);
+
+        //Codigo para insertar la ruta absoluta
+        product.image = `${req.protocol}://${req.get('host')}/${product.image}`;
+        return{
+          ...item,
+          product
+        }
+      }));
+
+      order = {
+        ...order.toJSON(),
+        products
+      }
+    };
+    res.status(200).json({order});
+
+  } catch (error) {
+      res.status(500).json({
+      message: `Internal server error' ${error.message}`
+    });
+  }
+};
+
 const createOrder = async (req, res) => {
   const cart = req.body;
 
@@ -102,5 +137,6 @@ const createOrder = async (req, res) => {
 export{
   loadDefaultOrder,
   getOrders,
-  createOrder
+  createOrder,
+  getIdOrder
 }
