@@ -1,4 +1,3 @@
-import sequelize from '../config/database.js';
 import { CartItem, Product, DeliveryOption} from '../models/index.js'
 
 const getPaymentSummary = async (req, res) => {
