@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node backend/src/index.js",
-    "dev": "nodemon --legacy-watch backend/src/index.js"
+    "dev": "NODE_ENV=development nodemon --legacy-watch backend/src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +23,7 @@
     "@eslint/json": "^1.0.0",
     "eslint": "^9.39.2",
     "globals": "^17.3.0",
+    "morgan": "^1.10.1",
     "nodemon": "^3.1.11"
   }
 }

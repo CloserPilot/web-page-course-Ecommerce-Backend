@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
+import morgan from 'morgan'
 import {
   productRouter,
   deliveryRouter,
@@ -15,10 +16,15 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true
-}))
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'))
+  app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+  }))
+}
+
+
 
 app.use(express.json());
 
