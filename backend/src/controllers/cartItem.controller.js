@@ -42,8 +42,8 @@ const registerCart = async (req, res) => {
     }
 
     //Check if quantity is a number between 1 and 10
-    if (typeof quantity !== 'number' || quantity < 1 || quantity > 10){
-      return res.status(400).json({ error: 'Quantity must be a number between 1 and 10' });
+    if (typeof quantity !== 'number' || quantity < 1){
+      return res.status(400).json({ error: 'Quantity must be a number greater than 0' });
     }
 
     //Check if product already exist in the cart
