@@ -6,7 +6,7 @@ import DeliveryOptions from '../models/deliveryOptions.model.js'
 const getOrders = async (req, res) => {
   try {
     const expand = req.query.expand;
-    let orders = await Order.findAll();
+    let orders = await Order.findAll({order: [['orderTimeMs', 'DESC']]});
 
     if(expand === 'product'){
       orders = await Promise.all(orders.map( async (order) => {
@@ -72,7 +72,7 @@ const getIdOrder = async (req, res) => {
 };
 
 const createOrder = async (req, res) => {
-  const cart = req.body;
+  const cart = await Cartitem.findAll();
 
   if(!Array.isArray(cart) || cart.length === 0){
     return res.status(400).json({ error: 'Invalid Car'})
