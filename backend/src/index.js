@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import sequelize from './config/database.js';
 import app from './server.js';
-import { loadDefaultProducts } from './controllers/product.controllers.js'
+import { loadDefaultProducts } from './controllers/product.controller.js'
 
 dotenv.config(
   { path: './.env' }

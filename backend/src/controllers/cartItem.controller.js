@@ -12,7 +12,6 @@ const getDefaultCarts = async (req, res) => {
 
         //Codigo para insertar la ruta absoluta
         product = product.toJSON();
-        product.image = `${req.protocol}://${req.get('host')}/${product.image}`;
 
         return{
           ...item.toJSON(),

@@ -19,7 +19,8 @@ const __dirname = path.dirname(__filename);
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
   app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: '*',
+    //origin: 'http://localhost:5173',
     credentials: true
   }))
 }
