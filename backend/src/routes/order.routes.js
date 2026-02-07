@@ -10,4 +10,4 @@ export default orderRouter;
 
 //http://localhost:4000/api/order?expand=product
 //http://localhost:4000/api/order/
-//http://localhost:4000/api/order?expand=product/:orderID
+//http://localhost:4000/api/order/:orderID?expand=product

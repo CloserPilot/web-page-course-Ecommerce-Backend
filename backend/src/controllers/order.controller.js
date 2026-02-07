@@ -13,8 +13,6 @@ const getOrders = async (req, res) => {
           const products = await Promise.all(order.products.map(async (product) => {
             let productDetailt = await Product.findByPk(product.productId);
             productDetailt = productDetailt.toJSON();
-            productDetailt.image = `${req.protocol}://${req.get('host')}/${productDetailt.image}`;
-
             return {
               ...product,
               product: productDetailt
@@ -48,9 +46,6 @@ const getIdOrder = async (req, res) => {
     if(expand === 'product'){
       const products = await Promise.all(order.products.map( async (item) => {
         let product = await Product.findByPk(item.productId);
-
-        //Codigo para insertar la ruta absoluta
-        product.image = `${req.protocol}://${req.get('host')}/${product.image}`;
         return{
           ...item,
           product
