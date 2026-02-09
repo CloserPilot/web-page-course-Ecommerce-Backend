@@ -22,7 +22,7 @@ const getPaymentSummary = async (req, res) => {
         const totalCost = totalCostBeforeTax + tax;
 
         if (totalitems === 0) {
-            res.status(200).json([])
+            res.status(200).json({})
         } else {
             res.status(200).json({
                 totalitems,
